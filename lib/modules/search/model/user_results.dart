@@ -77,7 +77,7 @@ class Info {
 }
 
 class Result {
-  final String gender;
+  final Gender gender;
   final Name name;
   final Location location;
   final String email;
@@ -106,7 +106,7 @@ class Result {
   });
 
   Result copyWith({
-    String? gender,
+    Gender? gender,
     Name? name,
     Location? location,
     String? email,
@@ -135,7 +135,7 @@ class Result {
       );
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        gender: json["gender"],
+        gender: genderValues.map[json["gender"]]!,
         name: Name.fromJson(json["name"]),
         location: Location.fromJson(json["location"]),
         email: json["email"],
@@ -150,7 +150,7 @@ class Result {
       );
 
   Map<String, dynamic> toJson() => {
-        "gender": gender,
+        "gender": genderValues.reverse[gender],
         "name": name.toJson(),
         "location": location.toJson(),
         "email": email,
@@ -194,9 +194,13 @@ class Dob {
       };
 }
 
+enum Gender { FEMALE, MALE }
+
+final genderValues = EnumValues({"female": Gender.FEMALE, "male": Gender.MALE});
+
 class Id {
   final String name;
-  final String value;
+  final String? value;
 
   Id({
     required this.name,
@@ -228,7 +232,7 @@ class Location {
   final String city;
   final String state;
   final String country;
-  final String postcode;
+  final dynamic postcode;
   final Coordinates coordinates;
   final Timezone timezone;
 
@@ -247,7 +251,7 @@ class Location {
     String? city,
     String? state,
     String? country,
-    String? postcode,
+    dynamic postcode,
     Coordinates? coordinates,
     Timezone? timezone,
   }) =>
@@ -496,4 +500,16 @@ class Picture {
         "medium": medium,
         "thumbnail": thumbnail,
       };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
