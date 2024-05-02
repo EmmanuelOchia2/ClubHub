@@ -33,7 +33,7 @@ class DetailsView extends StatelessWidget {
                 child: const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Volver',
+                    'Back',
                     style: TextStyle(
                       color: Colors.white,
                     ),
