@@ -1,4 +1,4 @@
-import 'package:clubhub_app/modules/search/bloc/bloc/search_bloc.dart';
+import 'package:clubhub_app/modules/search/bloc/search_bloc/search_bloc.dart';
 import 'package:clubhub_app/modules/search/data/user_repository.dart';
 import 'package:clubhub_app/modules/search/presentation/search_view/results_view.dart';
 import 'package:clubhub_app/modules/search/presentation/widgets/search_view_body.dart';

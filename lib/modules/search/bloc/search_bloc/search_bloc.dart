@@ -18,7 +18,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         if (searchResult != null) {
           if (searchResult.results.isNotEmpty) {
             final resultsFiltrered = searchResult.results
-                .where((element) => _containsTermInName(element, event.query))
+                .where((element) => element.matchesName(event.query))
                 .toList();
             emit(SearchLoaded(searchResult: resultsFiltrered));
           } else {
@@ -31,11 +31,5 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(SearchError(message: 'Failed to perform search ${e.toString()}'));
       }
     });
-  }
-
-  bool _containsTermInName(Result element, String query) {
-    final name = element.name;
-    return name.first.toLowerCase().contains(query.toLowerCase()) ||
-        name.last.toLowerCase().contains(query.toLowerCase());
   }
 }

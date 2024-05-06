@@ -148,6 +148,8 @@ class Result {
         picture: Picture.fromJson(json["picture"]),
         nat: json["nat"],
       );
+  bool matchesName(String term) =>
+      name.first.contains(term) || name.last.contains(term);
 
   Map<String, dynamic> toJson() => {
         "gender": genderValues.reverse[gender],
